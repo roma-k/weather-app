@@ -11,7 +11,7 @@ const temperature = document.getElementById('temperature');
 const pressure = document.getElementById('pressure');
 const windSpeed = document.getElementById('wind-speed');
 const humidity = document.getElementById('humidity');
-const recentSearchesElement = document.getElementById('recent-searches'); // Добавлено
+const recentSearchesElement = document.getElementById('recent-searches'); // Убедитесь, что элемент существует
 
 // Получить данные о погоде для города
 async function fetchWeatherData(city) {
@@ -39,7 +39,7 @@ function updateWeatherUI(data) {
     humidity.textContent = `${data.main.humidity}%`;
     weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     storeRecentSearch(data.name);
-    displayRecentSearches();
+    displayRecentSearches(); // Вызов функции для отображения недавних поисков
 }
 
 // Получить список релевантных результатов для введенного города
@@ -103,6 +103,7 @@ function getRecentSearches() {
 
 // Отобразить недавние поиски
 function displayRecentSearches() {
+    if (!recentSearchesElement) return; // Проверяем наличие элемента
     recentSearchesElement.innerHTML = ''; // Очистить предыдущие результаты
     const recentSearches = getRecentSearches();
     recentSearches.forEach(city => {

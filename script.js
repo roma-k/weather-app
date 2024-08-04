@@ -11,6 +11,7 @@ const temperature = document.getElementById('temperature');
 const pressure = document.getElementById('pressure');
 const windSpeed = document.getElementById('wind-speed');
 const humidity = document.getElementById('humidity');
+const recentSearchesElement = document.getElementById('recent-searches'); // Добавлено
 
 // Получить данные о погоде для города
 async function fetchWeatherData(city) {
@@ -102,13 +103,12 @@ function getRecentSearches() {
 
 // Отобразить недавние поиски
 function displayRecentSearches() {
+    recentSearchesElement.innerHTML = ''; // Очистить предыдущие результаты
     const recentSearches = getRecentSearches();
-    const datalist = document.getElementById('recent-searches');
-    datalist.innerHTML = '';
     recentSearches.forEach(city => {
         const option = document.createElement('option');
         option.value = city;
-        datalist.appendChild(option);
+        recentSearchesElement.appendChild(option);
     });
 }
 
